@@ -1,7 +1,9 @@
-package com.zhouwei.anything;
+package com.zhouwei.anything.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.zhouwei.anything.R;
 
 public class MainActivity extends AppCompatActivity {
 
