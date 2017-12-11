@@ -2,10 +2,15 @@ package com.zhouwei.anything.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import static android.R.attr.x;
+import static android.R.attr.y;
 
 /**
  * <p>
@@ -89,7 +94,7 @@ public class SurfaceViewTemplate extends SurfaceView implements SurfaceHolder.Ca
      *
      * @param mCanvas
      */
-    protected void drawAnyThing(Canvas mCanvas) {
-
+    protected void drawAnyThing(Canvas canvas) {
     }
+
 }
