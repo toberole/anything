@@ -15,21 +15,20 @@ import static android.R.attr.y;
 
 /*
 
-在xml属性里set了  android:backgrand 属性后，surfaceview的绘图失效了（其实是被覆盖了）。
+    在xml属性里set了 android:backgrand 属性后，surfaceview的绘图失效了（其实是被覆盖了）。
 
-网上的普遍解决方案是
-    sfv.setZOrderOnTop(true);      // 这句不能少
-    sfv.getHolder().setFormat(PixelFormat.TRANSPARENT);
+    网上的普遍解决方案是
+        sfv.setZOrderOnTop(true);
+        sfv.getHolder().setFormat(PixelFormat.TRANSPARENT);
 
-虽能解决问题，但是同时也衍生了新的问题。surfaceview会置于最顶层，
-采取framelayout布局且与surfaceview处于同一个区域的组件会被遮挡掉。
+    虽能解决问题，但是同时也衍生了新的问题。surfaceview会置于最顶层，
+    采取framelayout布局且与surfaceview处于同一个区域的组件会被遮挡掉。
 
 
-解决方法：
-    在surfaceCreated方法里面绘制背景
+    解决方法：
+        在surfaceCreated方法里面绘制背景
 
- */
-
+*/
 
 /**
  * <p>
@@ -98,18 +97,19 @@ public class SurfaceViewTemplate extends SurfaceView implements SurfaceHolder.Ca
         mIsDrawing = false;
     }
 
+
+    protected long interval = 100;// 两次绘制动作之间的间隔时间
+
     @Override
     public void run() {
         while (mIsDrawing) {
             long start = System.currentTimeMillis();
-
             draw();
-
             long end = System.currentTimeMillis();
-            // 最快100毫秒绘制一次
-            if (end - start < 100) {
+            // 最快100毫秒绘制一次 避免过于频繁的绘制 interval时间可以自己调正
+            if (end - start < interval) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(interval - (end - start));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
