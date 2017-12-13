@@ -19,6 +19,34 @@
 
 # 差值器是用来控制目标变量如何最时间变化的，比如匀速、加速、先加速后减速
 
+```
 
+Failed to connect to github.com port 443
+
+建立一个github帐号(pythonsoft)之后，按照提示create a repository: test.
+
+想把这个项目clone到本地:
+
+git clone https://github.com/pythonsoft/test.git
+
+出现错误：
+
+unable to access 'https://github.com/pythonsoft/test.git: Failed to connect to github.com port 443‘
+
+原因是没有输入指定用户名和密码：
+
+打开终端，切换到git目录(我的是/home/steven/.git)
+
+sudo gedit config
+
+把url = https://github.com/pythonsoft/test.git改成url = https://用户名:密码@github.com/pythonsoft/test.git。
+
+然后就可以了。
+
+
+
+
+
+```
 
 
