@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>error page</title>
+
+    <style>
+        h1 {
+            color: red;
+            text-align: center;
+        }
+    </style>
+
+    <script type="application/javascript">
+        function reload() {
+            // android.reload();
+
+        }
+
+        //js异步方法
+        function asyncFun() {
+            console.log("asyncFun method");
+            setTimeout(function () {
+                    console.log("异步执行");
+                    // 异步回调 android.callBack("来自JavaScript的异步消息");
+                },
+                5000);
+        }
+    </script>
+</head>
+<body>
+<h1 onclick="reload()">服务器繁忙...请稍候重试</h1>
+</body>
+</html>

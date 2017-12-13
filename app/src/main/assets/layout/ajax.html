@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+
+
+    <script type="application/javascript">
+        function success(text) {
+
+        }
+
+        function fail(code) {
+
+        }
+
+        <!--
+
+            通过检测window对象是否有XMLHttpRequest属性来确定浏览器是否支持标准的XMLHttpRequest。
+            注意，不要根据浏览器的navigator.userAgent来检测浏览器是否支持某个JavaScript特性，
+            一是因为这个字符串本身可以伪造，
+            二是通过IE版本判断JavaScript特性将非常复杂。
+
+        -->
+        function postRequest(params) {
+            var request;
+            if (window.XMLHttpRequest) {
+                request = new XMLHttpRequest();
+            } else {
+                request = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            request.onreadystatechange = function () { // 状态发生变化时，函数被回调
+                if (request.readyState === 4) { // 成功完成
+                    // 判断响应结果:
+                    if (request.status === 200) {
+                        // 成功，通过responseText拿到响应的文本:
+                        return success(request.responseText);
+                    } else {
+                        // 失败，根据响应码判断失败原因:
+                        return fail(request.status);
+                    }
+                } else {
+                    // HTTP请求还在继续...
+                }
+            }
+
+            // 发送请求:
+            request.open('GET', '/api/categories');
+            request.send();
+        }
+
+
+    </script>
+</head>
+<body>
+<!--
+
+
+var worker = new Worker("./outer.js");
+worker.addEventListener("message", function(e){
+    console.log(e.message);
+});
+worker.postMessage("data one");
+worker.postMessage("data two");
+
+// outer.js
+self.addEventListener("message", function(e){
+    self.postMessage(e.message);
+});
+
+-->
+</body>
+</html>

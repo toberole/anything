@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <!--
+
+    js与java同步交互的简单的协议
+    var exec_sync = function (service, action, args) {
+        var json = {
+           "service" : service,// navtive里面的类名
+           "action" : action // navtive里面类的方法
+        };
+        var result = AndroidHtml5.callNative(json, args);
+        return result;
+    }
+
+    //////////////////////////////////////////////////////////////////////////
+    js与java异步交互的简单的协议
+    service、action 可以自己定义
+    args 参数
+    success java执行成功后回调的js方法
+    var exec_async = function(service, action, args, success, fail) {
+           var json = {
+                   "service" : service,
+                   "action" : action
+           };
+           var result = AndroidHtml5.callNative(json, args, success, fail);
+    }
+
+    -->
+    <script type="text/javascript">
+        <!--
+        给java代码调用-->
+        function javacalljs() {
+            document.getElementById("content").innerHTML = "<br/> JAVA 调用了JS的无参函数";
+        }
+
+        <!--给java代码调用-->
+        function javaCalljsparams(param) {
+            document.getElementById("content").innerHTML = "<br/> java 调用了JS带参数的函数 <br/>" + param;
+        }
+
+        <!--js调用java代码-->
+        function callJavaFun() {
+            android.toast();
+        }
+
+        <!--js调用java代码-->
+        function callJavaFunParam() {
+            var res = android.add(1, 2);
+            document.getElementById("content").innerHTML = "<br/> js 调用了java带参数的函数 <br/>结果是：" + res;
+        }
+
+        <!--使用重定向与java交互 在shouldOverrideUrlLoading截取url 做出相应的动作-->
+        function callJavaFunStartActivity() {
+            <!--在url后面加个时间是为了防止缓存-->
+            window.location.href = window.location.href + '?action=startActivity&time=' + ((new Date()).getTime());
+        }
+
+    </script>
+</head>
+
+<body>
+<font color="red">
+    <h1 align="center">Hello Android H5<h1/>
+</font>
+<br/>
+<input type="button" value="点击调用java无参方法" onclick=callJavaFun()></input>
+
+<br/><br/>
+<input type="button" value="点击调用java带参方法" onclick=callJavaFunParam()></input>
+
+<br/><br/>
+<input type="button" value="自定义交互协议调用java带参方法" onclick=callJavaFunStartActivity()></input>
+
+
+<div id="content"></div>
+</body>
+</html>

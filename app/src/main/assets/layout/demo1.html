@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+
+   js与java同步交互的简单的协议
+   var exec_sync = function (service, action, args) {
+       var json = {
+          "service" : service,// navtive里面的类名
+          "action" : action // navtive里面类的方法
+       };
+       var result = AndroidHtml5.callNative(json, args);
+       return result;
+   }
+
+   //////////////////////////////////////////////////////////////////////////
+   js与java异步交互的简单的协议
+   service、action 可以自己定义
+   args 参数
+   success java执行成功后回调的js方法
+   var exec_async = function(service, action, args, success, fail) {
+          var json = {
+                  "service" : service,
+                  "action" : action
+          };
+          var result = AndroidHtml5.callNative(json, args, success, fail);
+   }
+
+   -->
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+
+    <title>demo1</title>
+
+
+    <script type="text/css">
+
+
+    </script>
+
+    <script type="application/javascript">
+
+
+        var exec_sync = function (service, action, args) {
+            var json = {
+                "service": service,
+                "action": action
+            };
+            var result = android.jsCallNative(JSON.stringify(json), args);
+            return result;
+        }
+
+        var exec_async = function (service, action, args, success, fail) {
+            var json = {
+                "service": service,
+                "action": action
+            };
+            var result = android.jsCallNative(JSON.stringify(json), args, success, fail);
+        }
+
+
+        function sync() {
+            var res = exec_sync("SyncService", "action1", "js同步调用java代码");
+            alert("同步调用java代码 返回值：" + res);
+        }
+
+        function async() {
+            exec_async("ASyncService", "action1", "js异步调用java代码", "asyncSuccessCallback", "asyncFailCallback");
+        }
+
+        function asyncSuccessCallback(param) {
+             alert("异步调用java代码 成功的回调：" + param);
+            // 测试java调用js是不是同步的
+//            setTimeout(function () {
+//                while (true) {
+//
+//                }
+//            }, 1000);
+//            while (true){
+//
+//            }
+            // 测试证明java调用js代码是同步的，可以在js端做异步的操作
+        }
+
+        function asyncFailCallback(param) {
+             alert("异步调用java代码 失败的回调：" + param);
+//            while (true){
+//
+//            }
+
+//            setTimeout(function () {
+//                while (true) {
+//
+//                }
+//            }, 1000);
+        }
+
+        function test() {
+        }
+
+
+    </script>
+</head>
+<body>
+
+<div>
+    <br/><br/>
+    <input style="width: 100%" type="button" value="同步调用java代码" onclick=sync()>
+    <br/><br/>
+    <input style="width: 100%" type="button" value="异步调用java代码" onclick=async()>
+</div>
+</body>
+</html>

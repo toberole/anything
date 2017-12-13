@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+
+    <title>main</title>
+
+    <style>
+
+        li {
+            list-style-type: none;
+        }
+
+    </style>
+
+    <script type="application/javascript">
+        function showData(json) {
+            var data = eval('(' + json + ')');
+            for (var i in data) {
+                var name = data[i].name;
+                var ul = document.getElementById("lv_showdata");
+                var li1 = document.createElement("li");
+                li1.innerText = name;
+                ul.appendChild(li1);
+            }
+        }
+    </script>
+</head>
+<body>
+<ul id="lv_showdata"/>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>
