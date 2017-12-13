@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开关按钮</title>
+    <style>
+        .ipt {
+            display: none;
+        }
+
+        .box {
+            width: 74px;
+            height: 30px;
+            line-height: 30px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        label {
+            display: inline-block;
+        }
+
+        .ipt:checked + .box .switch-btn {
+            left: 0;
+        }
+
+        .switch-btn {
+            position: absolute;
+            left: -37px;
+            top: 0;
+            width: 111px;
+            height: 30px;
+            transition: all 0.5s;
+        }
+
+        .switch-btn span {
+            width: 37px;
+            height: 30px;
+            display: block;
+            text-align: center;
+            float: left;
+            font-size: 14px;
+        }
+
+        .on {
+            background: #52B13C;
+            color: white;
+        }
+
+        .white {
+            background: white;
+        }
+
+        .off {
+            background: #EEEEEE;
+        }
+    </style>
+</head>
+<body>
+<p>主要使用label+input来实现改变left的值,下面是核心代码，意思就是<code>选中的input的兄弟节点.box下的.switch-btn元素的left会变成0px(原来是-37px);</code></p>
+<pre>
+    .ipt:checked + .box .switch-btn {
+      left: 0;
+    }
+  </pre>
+<p>当然要配合transition来实现</p>
+<p>下面是效果</p>
+<div class="wrap">
+    <label>
+        <input class="ipt" type="checkbox" name="" value="">
+        <div class="box">
+            <div class="switch-btn">
+                <span class="on">ON</span>
+                <span class="white"></span>
+                <span class="off">OFF</span>
+            </div>
+        </div>
+    </label>
+</div>
+<p>全部css代码</p>
+<pre>
+      .ipt {
+        display: none;
+      }
+      .box {
+        width: 74px;
+        height: 30px;
+        line-height: 30px;
+        overflow: hidden;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        position: relative;
+        cursor: pointer;
+      }
+      .ipt:checked + .box .switch-btn {
+        left: 0;
+      }
+      .switch-btn {
+        position: absolute;
+        left: -37px;
+        top: 0;
+        width: 111px;
+        height: 30px;
+        transition: all 0.5s;
+      }
+      .switch-btn span{
+        width: 37px;
+        height: 30px;
+        display: block;
+        text-align: center;
+        float: left;
+        font-size: 14px;
+      }
+      .on {
+        background: #52B13C;
+        color: white;
+      }
+      .white {
+        background: white;
+      }
+      .off {
+        background: #EEEEEE;
+      }
+  </pre>
+</body>
+</html>
