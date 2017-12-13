@@ -1,6 +1,8 @@
 package com.zhouwei.anything.webview;
 
 import android.graphics.Bitmap;
+import android.net.http.SslError;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -62,5 +64,11 @@ public class CustomWebViewClient extends WebViewClient {
         if (callback != null) {
             callback.onReceivedError(view, request, error);
         }
+    }
+
+    @Override
+    public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+        // handler.cancel(); webView变成空白
+        // handler.proceed(); 接受证书
     }
 }
