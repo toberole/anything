@@ -12,7 +12,7 @@ import android.webkit.WebView;
 public class WebViewClientCallback {
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         view.loadUrl(url);
-        return true;
+        return true;// 返回值true表示不用系统的浏览器 返回false表示使用系统浏览器
     }
 
     public void onPageFinished(WebView view, String url) {
