@@ -1,28 +1,25 @@
 package com.zhouwei.anything.bean;
 
 import android.content.ContentValues;
-import android.util.Log;
 
 import com.zhouwei.anything.xxorm.BaseBean;
 
 /**
- * Created by zhouwei on 2017/12/14.
+ * Created by zhouwei on 2017/12/21.
  */
 
-public class Person extends BaseBean {
-    private int id;
+public class Student extends BaseBean {
     private String name;
     private int age;
+    private int id;
 
-    public Person() {
-
+    public Student() {
     }
 
-    private Person(ContentValues values) {
+    private Student(ContentValues values) {
         try {
-            setId(Integer.parseInt(String.valueOf(values.get("id"))));
-            setName(String.valueOf(values.get("name")));
             setAge(Integer.parseInt(String.valueOf(values.get("age"))));
+            setName(String.valueOf(values.get("name")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,16 +29,9 @@ public class Person extends BaseBean {
     public ContentValues save() {
         ContentValues values = new ContentValues();
         values.put("name", name);
+        values.put("id", id);
         values.put("age", age);
         return values;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -60,12 +50,13 @@ public class Person extends BaseBean {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
 }

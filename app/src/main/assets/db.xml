@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dbs>
+    <db>
+        <dbName>dbtest</dbName>
+        <version>1</version>
+
+        <cursorFactory type="com.zhouwei.anything.xxorm.DefaultCursorFactoryctory" />
+
+        <databaseErrorHandler
+            type="com.zhouwei.anything.xxorm.DefaultDBDatabaseErrorHandlerHandler" />
+        <mapping beanName="com.zhouwei.anything.bean.Person">
+
+            <property autoincre="true" primaryKey="true">
+                <name>id</name>
+                <type>int</type>
+            </property>
+
+            <property>
+                <name>name</name>
+                <type>string</type>
+            </property>
+
+            <property>
+                <name>age</name>
+                <type>int</type>
+            </property>
+
+        </mapping>
+
+        <mapping beanName="com.zhouwei.anything.bean.Student">
+
+            <property autoincre="true" primaryKey="true">
+                <name>id</name>
+                <type>int</type>
+            </property>
+
+            <property>
+                <name>name</name>
+                <type>string</type>
+            </property>
+
+            <property>
+                <name>age</name>
+                <type>int</type>
+            </property>
+
+        </mapping>
+    </db>
+</dbs>
