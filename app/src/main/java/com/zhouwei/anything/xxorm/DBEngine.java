@@ -76,7 +76,15 @@ public class DBEngine {
         if (assertinit()) {
             DBSQLiteOpenHelper dbSQLiteOpenHelper = helpers.get(tableDbNameDic.get(clazz.getSimpleName()));
             SQLiteDatabase db = dbSQLiteOpenHelper.getReadableDatabase();
-            db.update(clazz.getSimpleName(), values, whereClause, whereArgs);
+            try {
+                db.beginTransaction();
+                db.update(clazz.getSimpleName(), values, whereClause, whereArgs);
+                db.setTransactionSuccessful();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                db.endTransaction();
+            }
         }
     }
 
