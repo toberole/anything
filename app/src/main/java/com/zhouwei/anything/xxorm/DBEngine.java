@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import java.util.Map;
  */
 
 public class DBEngine {
+    private static final String TAG = DBEngine.class.getSimpleName();
+
     private DBConfig dbConfig;
     private Context context;
     private volatile boolean isInit = false;
@@ -29,12 +32,14 @@ public class DBEngine {
         return tableDbNameDic;
     }
 
-    public void save(Class clazz, ContentValues values) {
+    public void save(Sprite sprite) {
         if (assertinit()) {
-            DBSQLiteOpenHelper dbSQLiteOpenHelper = helpers.get(tableDbNameDic.get(clazz.getSimpleName()));
+            String tableName = sprite.getClass().getSimpleName();
+            ContentValues values = sprite.save();
+            DBSQLiteOpenHelper dbSQLiteOpenHelper = helpers.get(tableDbNameDic.get(tableName));
             if (dbSQLiteOpenHelper != null) {
                 SQLiteDatabase db = dbSQLiteOpenHelper.getWritableDatabase();
-                db.insert(clazz.getSimpleName(), "name", values);
+                db.insert(tableName, "name", values);
                 db.close();
             }
         }
@@ -93,6 +98,7 @@ public class DBEngine {
         for (Map.Entry<String, DBInfo> en : dbs.entrySet()) {
             String dbName = en.getKey();
             DBInfo dbInfo = en.getValue();
+            Log.i(TAG, "dbName: " + dbName + " dbInfo: " + dbInfo);
             DBSQLiteOpenHelper helper = dbInfo.createDBSQLiteOpenHelper();
             helpers.put(dbName, helper);
         }

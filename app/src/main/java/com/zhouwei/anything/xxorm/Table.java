@@ -19,11 +19,15 @@ public class Table {
     }
 
     public void setBeanName(String beanName) {
-        if (!TextUtils.isEmpty(beanName)) {
+        if (!TextUtils.isEmpty(beanName) && isSprite(beanName)) {
             this.beanName = beanName;
             int index = beanName.lastIndexOf(".");
             tableName = beanName.substring(index + 1);
         }
+    }
+
+    private boolean isSprite(String beanName) {
+        return false;
     }
 
     public String createTableSql() {

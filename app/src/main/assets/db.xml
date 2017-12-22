@@ -46,4 +46,34 @@
 
         </mapping>
     </db>
+
+    <!--
+    <db>
+        <dbName>log.db</dbName>
+        <version>1</version>
+
+        <mapping beanName="com.zhouwei.anything.bean.Log">
+            <property>
+                <name>tag</name>
+                <type>string</type>
+            </property>
+
+            <property>
+                <name>msg</name>
+                <type>string</type>
+            </property>
+
+            <property>
+                <name>time</name>
+                <type>string</type>
+            </property>
+
+            <property>
+                <name>thread</name>
+                <type>string</type>
+            </property>
+        </mapping>
+    </db>
+
+    -->
 </dbs>

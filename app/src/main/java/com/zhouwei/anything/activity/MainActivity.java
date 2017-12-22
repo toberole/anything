@@ -66,7 +66,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
         Person person = new Person();
         person.setAge(11);
         person.setName("xiaohon");
-        DBEngine.getInstance().save(Person.class, person.save());
+        DBEngine.getInstance().save(person);
+
+        ContentValues values = new ContentValues();
+        values.put("tag", "MainActivity");
+        values.put("msg", " activity onCreate");
+        values.put("time", System.currentTimeMillis());
+        values.put("thread", Thread.currentThread().getName());
+        com.zhouwei.anything.bean.Log log = new com.zhouwei.anything.bean.Log(values);
+        DBEngine.getInstance().save(log);
     }
 
     private void get() {
@@ -76,6 +84,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             for (int i = 0; i < ps.size(); i++) {
                 Log.i("AAAA", "person: " + ps.get(i));
             }
+        }
+
+        List<com.zhouwei.anything.bean.Log> logs = DBEngine.getInstance().get(com.zhouwei.anything.bean.Log.class, null, null, null, null, null);
+        for (int i = 0; i < logs.size(); i++) {
+            Log.i("AAAA", logs.get(i) + "");
         }
     }
 

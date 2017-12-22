@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by zhouwei on 2017/12/20.
  */
 
-public class XMLParser implements IConfigParser {
+public class XMLParser {
     private static final String TAG = XMLParser.class.getSimpleName();
 
     public void parserConfig(InputStream inputStream, String inputEncoding) {

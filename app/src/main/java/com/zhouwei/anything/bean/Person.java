@@ -1,15 +1,14 @@
 package com.zhouwei.anything.bean;
 
 import android.content.ContentValues;
-import android.util.Log;
 
-import com.zhouwei.anything.xxorm.BaseBean;
+import com.zhouwei.anything.xxorm.Sprite;
 
 /**
  * Created by zhouwei on 2017/12/14.
  */
 
-public class Person extends BaseBean {
+public class Person implements Sprite {
     private int id;
     private String name;
     private int age;
@@ -18,7 +17,7 @@ public class Person extends BaseBean {
 
     }
 
-    private Person(ContentValues values) {
+    public Person(ContentValues values) {
         try {
             setId(Integer.parseInt(String.valueOf(values.get("id"))));
             setName(String.valueOf(values.get("name")));
