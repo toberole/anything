@@ -36,7 +36,7 @@ public class DBConfig {
     }
 
     public void parserDBConfig(InputStream inputStream) {
-        XMLParser.getInstance().parserDBConfig(inputStream, "UTF-8");
+        XMLParser.getInstance().parserConfig(inputStream, "UTF-8");
     }
 
     @Override

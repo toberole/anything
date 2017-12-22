@@ -13,19 +13,10 @@ import java.util.Map;
  * Created by zhouwei on 2017/12/20.
  */
 
-public class XMLParser {
-    public static XMLParser getInstance() {
-        return XMLParserHolder.parser;
-    }
+public class XMLParser implements IConfigParser {
+    private static final String TAG = XMLParser.class.getSimpleName();
 
-    private XMLParser() {
-    }
-
-    private static class XMLParserHolder {
-        public static XMLParser parser = new XMLParser();
-    }
-
-    public void parserDBConfig(InputStream inputStream, String inputEncoding) {
+    public void parserConfig(InputStream inputStream, String inputEncoding) {
         DBConfig dbConfig = null;
         DBInfo dbInfo = null;
         Table table = null;
@@ -45,7 +36,7 @@ public class XMLParser {
                         break;
                     case XmlPullParser.START_TAG:
                         String tagName = parser.getName();
-                        //Log.i("AAAA", "tagName: " + tagName);
+                        //Log.i(TAG, "tagName: " + tagName);
 
                         if ("db".equalsIgnoreCase(tagName)) {
                             dbInfo = new DBInfo();
@@ -89,7 +80,6 @@ public class XMLParser {
                         String tn = parser.getName();
                         if ("db".equalsIgnoreCase(tn)) {
                             dbConfig.putDBInfo(dbInfo);
-                            Log.i("BBBB", "dbInfo: " + dbInfo);
                             dbInfo = null;
                         } else if ("mapping".equalsIgnoreCase(tn)) {
                             dbInfo.putTable(table);
@@ -109,7 +99,7 @@ public class XMLParser {
             inputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
-            Log.i("AAAA", "e: " + e.getMessage());
+            Log.i(TAG, "e: " + e.getMessage());
         }
     }
 
@@ -125,5 +115,16 @@ public class XMLParser {
         }
 
         return text;
+    }
+
+    public static XMLParser getInstance() {
+        return XMLParserHolder.parser;
+    }
+
+    private XMLParser() {
+    }
+
+    private static class XMLParserHolder {
+        public static XMLParser parser = new XMLParser();
     }
 }

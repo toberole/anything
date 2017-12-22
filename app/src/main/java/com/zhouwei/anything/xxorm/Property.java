@@ -35,6 +35,12 @@ public class Property {
                 type = float.class;
             } else if ("string".equalsIgnoreCase(propertyType)) {
                 type = String.class;
+            } else if ("double".equalsIgnoreCase(propertyType)) {
+                type = double.class;
+            } else if ("byte".equalsIgnoreCase(propertyType)) {
+                type = byte.class;
+            } else if ("short".equalsIgnoreCase(propertyType)) {
+                type = short.class;
             }
         }
     }
